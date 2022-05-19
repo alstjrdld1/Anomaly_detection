@@ -283,12 +283,12 @@ class MyDataSet(Dataset):
 ################################ TRAIN CODE #################################
 def main():
     print("load data.... ")
-    train_df = pd.read_csv("../UNSW_NB15_training-set.csv", index_col = False).drop('id', axis = 1)
+    # train_df = pd.read_csv("../UNSW_NB15_training-set.csv", index_col = False).drop('id', axis = 1)
     # test_df = pd.read_csv("../UNSW_NB15_testing-set.csv", index_col = False).drop('id', axis = 1)
     print("load data complete!")
 
     print("Making Dataset.... ")
-    train_data = MyDataSet(train_df)
+    train_data = MyDataSet()
     print("Making Dataset complete! ")
 
     WEIGHTDECAY = 1e-4
