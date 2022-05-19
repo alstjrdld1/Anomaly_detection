@@ -309,9 +309,9 @@ def main():
         
         # learning rate scheduling 
         scheduler.step()
-        if(epoch % 10 == 0):
+        if(epoch % 10 == 9):
             
-            torch.save(model.state_dict(), f'/ptfiles/20220519_{epoch}.pt')
+            torch.save(model.state_dict(), f'./ptfiles/20220519_{epoch}.pt')
     
     
 #     print(f"Last Top-1 Accuracy: {last_top1_acc}")
