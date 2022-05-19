@@ -230,6 +230,7 @@ class MyDataSet(Dataset):
         
         for packet in packets:
             self.x_train.append(make_patch(packet, (32, 32)))
+        self.x_train = np.array(self.x_train)
   
     def __len__(self):
         return len(self.y_train)
@@ -255,13 +256,18 @@ class MyDataSet(Dataset):
 #############################################################################
 ################################ TRAIN CODE #################################
 def main():
+    print("load data.... ")
     train_df = pd.read_csv("../UNSW_NB15_training-set.csv", index_col = False).drop('id', axis = 1)
     # test_df = pd.read_csv("../UNSW_NB15_testing-set.csv", index_col = False).drop('id', axis = 1)
+    print("load data complete!")
+
+    print("Making Dataset.... ")
     train_data = MyDataSet(train_df)
+    print("Making Dataset complete! ")
 
     WEIGHTDECAY = 1e-4
     MOMENTUM = 0.9
-    BATCHSIZE = 32
+    BATCHSIZE = 64
     LR = 0.1
     EPOCHS = 150
 
