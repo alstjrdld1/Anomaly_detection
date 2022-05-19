@@ -131,8 +131,8 @@ class PacketFeature:
     def __init__(self, feature_size):
         self.frame = np.zeros(feature_size)
         self.fsize = feature_size
-        print("Frame shape : ", self.frame.shape)
-        print("Frame size : ", self.fsize)
+        # print("Frame shape : ", self.frame.shape)
+        # print("Frame size : ", self.fsize)
         self.patch_count = 0
 
     def append(self, patch):
@@ -299,7 +299,7 @@ def main():
         scheduler.step()
         if(epoch % 10 == 0):
             
-            torch.save(model.state_dict(), f'20220519_{epoch}.pt')
+            torch.save(model.state_dict(), f'/ptfiles/20220519_{epoch}.pt')
     
     
 #     print(f"Last Top-1 Accuracy: {last_top1_acc}")
