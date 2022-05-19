@@ -344,6 +344,8 @@ def train(train_loader, epoch, model, optimizer, criterion):
                 
         input = torch.tensor(input, dtype=torch.float32)
         target = torch.tensor(target, dtype=torch.float32)
+
+        input = input.unsqueeze(1)
                 
         input = input.float()
         input = input.cuda()
