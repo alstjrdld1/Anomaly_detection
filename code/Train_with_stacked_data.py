@@ -323,7 +323,7 @@ def train(train_loader, epoch, model, optimizer, criterion):
         data_time.update(time.time() - end)
         input = np.array(input)
         print("input shape : ", input.shape)
-        input = np.kron(input, np.ones((7, 7)))
+        # input = np.kron(input, np.ones((7, 7)))
                 
         input = torch.tensor(input, dtype=torch.float32)
         
