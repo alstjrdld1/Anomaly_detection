@@ -230,7 +230,6 @@ class MyDataSet(Dataset):
         
         for packet in packets:
             self.x_train.append(make_patch(packet, (32, 32)))
-        self.x_train = np.array(self.x_train)
   
     def __len__(self):
         return len(self.y_train)
@@ -238,17 +237,8 @@ class MyDataSet(Dataset):
     def __getitem__(self, idx):
         if( (idx+49) >= len(self.x_train)):
             idx = len(self.x_train) - 49
-            
-        pf = PacketFeature((224,224))
-        label = 0
-        for i in range(49):
-            pf.append(self.x_train[idx + i])
-            label += self.y_train[idx + i]
-            
-        if (label == 0 ):
-            return pf.frame, label
-        else:
-            return pf.frame, 1
+        
+        return self.x_train[idx : idx+49], self.y_train[idx : idx+49]
 #############################################################################
 #############################################################################
 
