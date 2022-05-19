@@ -229,8 +229,8 @@ class MyDataSet(Dataset):
         self.y_train = []
         y_train = df.iloc[:, [-1]].values
         
-        pf = PacketFeature((224, 224))
         for idx, _ in enumerate(packets):
+            pf = PacketFeature((224, 224))
             if(idx+49 > len(packets)):
                 break
 
