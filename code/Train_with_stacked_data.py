@@ -226,19 +226,31 @@ class MyDataSet(Dataset):
     def __init__(self, df):
         packets = df.drop(['attack_cat', 'label'], axis=1).values
         self.x_train = []
-        self.y_train = df.iloc[:, [-1]].values
+        self.y_train = []
+        y_train = df.iloc[:, [-1]].values
         
-        for packet in packets:
-            self.x_train.append(make_patch(packet, (32, 32)))
+        pf = PacketFeature((224, 224))
+        for idx, _ in enumerate(packets):
+            if(idx+49 >= len(packets)):
+                break
+
+            sum = 0
+            for count in range(49):
+                pf.append(make_patch(packets[idx + count], (32, 32)))
+                sum += int(y_train[idx+count])
+
+            if(sum != 0):
+                self.y_train.append(1)
+            else:
+                self.y_train.append(0)
+
+            self.x_train.append(pf.frame)
   
     def __len__(self):
         return len(self.y_train)
     
     def __getitem__(self, idx):
-        if( (idx+49) >= len(self.x_train)):
-            idx = len(self.x_train) - 49
-        
-        return self.x_train[idx : idx+49], self.y_train[idx : idx+49]
+        return self.x_train[idx], self.y_train[idx]
 #############################################################################
 #############################################################################
 
@@ -318,26 +330,17 @@ def train(train_loader, epoch, model, optimizer, criterion):
     correct = 0
     best_acc = 0
     PRINTFREQ = 20
-    pf = PacketFeature((224, 224))
     for i, (input, target) in enumerate(train_loader):
         # measure data loading time 
         data_time.update(time.time() - end)
         print("input length : ", len(input))
+
         input = np.array(input)
-        for inp in input:
-            print(inp.shape)
-
-        for item in input:
-            pf.append(item)
-
-        print("Packet Feature shape : ", pf.frame.shape)
-
-        input = pf.frame
+        target = np.array(target)
                 
         input = torch.tensor(input, dtype=torch.float32)
-        
-        input = input.reshape(1, 224, 224)
-        
+        target = torch.tensor(target, dtype=torch.float32)
+                
         input = input.float()
         input = input.cuda()
         target = target.cuda()
