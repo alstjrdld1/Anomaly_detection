@@ -229,15 +229,18 @@ class MyDataSet(Dataset):
         self.y_train = []
         y_train = df.iloc[:, [-1]].values
         
-        for idx, _ in enumerate(packets):
+        patches = []
+        for packet in packets:
+            patches.append(make_patch(packet, (32, 32)))
+
+        for idx,_ in enumerate(patches):
             pf = PacketFeature((224, 224))
+
             if(idx+49 > len(packets)):
                 break
-
             sum = 0
             for count in range(49):
-                patch = make_patch(packets[idx + count], (32, 32))
-                pf.append(patch)
+                pf.append(patches[idx + count])
                 sum += int(y_train[idx+count])
 
             if(sum != 0):
