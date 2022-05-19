@@ -337,7 +337,7 @@ def train(train_loader, epoch, model, optimizer, criterion):
     for i, (input, target) in enumerate(train_loader):
         # measure data loading time 
         data_time.update(time.time() - end)
-        print("input length : ", len(input))
+        # print("input length : ", len(input))
 
         input = np.array(input)
         target = np.array(target)
