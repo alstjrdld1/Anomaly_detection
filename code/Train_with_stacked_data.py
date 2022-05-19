@@ -231,12 +231,13 @@ class MyDataSet(Dataset):
         
         pf = PacketFeature((224, 224))
         for idx, _ in enumerate(packets):
-            if(idx+49 >= len(packets)):
+            if(idx+49 > len(packets)):
                 break
 
             sum = 0
             for count in range(49):
-                pf.append(make_patch(packets[idx + count], (32, 32)))
+                patch = make_patch(packets[idx + count], (32, 32))
+                pf.append(patch)
                 sum += int(y_train[idx+count])
 
             if(sum != 0):
