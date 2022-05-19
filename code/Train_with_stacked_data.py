@@ -322,20 +322,21 @@ def train(train_loader, epoch, model, optimizer, criterion):
     for i, (input, target) in enumerate(train_loader):
         # measure data loading time 
         data_time.update(time.time() - end)
+        print("input length : ", len(input))
         input = np.array(input)
+        for inp in input:
+            print(inp.shape)
 
         for item in input:
             pf.append(item)
 
         print("Packet Feature shape : ", pf.frame.shape)
-        print("input shape : ", input.shape)
 
         input = pf.frame
-        # input = np.kron(input, np.ones((7, 7)))
                 
         input = torch.tensor(input, dtype=torch.float32)
         
-        input = input.unsqueeze(1)
+        input = input.reshape(1, 224, 224)
         
         input = input.float()
         input = input.cuda()
