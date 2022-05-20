@@ -29,7 +29,7 @@ if __name__ == "__main__":
     print("Testing.....")
     for idx, (input, target) in enumerate(test_loader):
         input = np.array(input)
-        input = torch.tensor(input, dtype=torch.float32)
+        input = torch.tensor(input)
 
         input = input.unsqueeze(1)
         input = input.float()
