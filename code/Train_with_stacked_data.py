@@ -309,9 +309,9 @@ def main():
         
         # learning rate scheduling 
         scheduler.step()
-        if(epoch % 10 == 9):
+        if(epoch % 10 == 0):
             
-            torch.save(model.state_dict(), f'./ptfiles/20220519_{epoch}.pt')
+            torch.save(model.state_dict(), f'/ptfiles/20220519_{epoch}.pt')
     
     
 #     print(f"Last Top-1 Accuracy: {last_top1_acc}")
@@ -337,13 +337,13 @@ def train(train_loader, epoch, model, optimizer, criterion):
     for i, (input, target) in enumerate(train_loader):
         # measure data loading time 
         data_time.update(time.time() - end)
-        # print("input length : ", len(input))
+        print("input length : ", len(input))
 
         input = np.array(input)
         target = np.array(target)
                 
         input = torch.tensor(input, dtype=torch.float32)
-        target = torch.tensor(target)
+        target = torch.tensor(target, dtype=torch.float32)
 
         input = input.unsqueeze(1)
                 
