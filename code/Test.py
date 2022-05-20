@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     print("Model weight load")
 
-    model.load_state_dict('./ptfiles/20220519_149.pt')
+    model.load_state_dict(torch.load('./ptfiles/20220519_149.pt'))
     print("Model weight load Complete")
 
     print("loading test_data")
