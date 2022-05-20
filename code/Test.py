@@ -8,13 +8,13 @@ from MyDataSet import *
 from torch.utils.data import DataLoader
 
 if __name__ == "__main__":
-
+    pt_file = sys.argv[1]
     print("Model load")
     model = MobileNetV1(ch_in=1, n_classes=2)
     print("Model load Complete")
 
     print("Model weight load")
-    model.load_state_dict(torch.load('./ptfiles/20220519_149.pt'))
+    model.load_state_dict(torch.load('./ptfiles/' + pt_file))
     model = model.cuda()
     print("Model weight load Complete")
 
