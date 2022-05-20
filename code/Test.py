@@ -1,3 +1,4 @@
+import sys 
 import torch
 import torch.nn as nn
 
@@ -7,6 +8,7 @@ from MyDataSet import *
 from torch.utils.data import DataLoader
 
 if __name__ == "__main__":
+
     print("Model load")
     model = MobileNetV1(ch_in=1, n_classes=2)
     print("Model load Complete")
@@ -42,7 +44,8 @@ if __name__ == "__main__":
         # print("Output[0] type : ", type(output[0]))
         # print("Target[0] type : ", type(target[0]))
         tmp_correct= 0
-        output = output.cpu().detach().numpy()
+        # output = output.cpu().detach().numpy()
+        output = torch.argmax(output, dim=1)
         for i in range(len(output)):
             print(output[i])
             print(target[i])
