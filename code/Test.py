@@ -47,10 +47,8 @@ if __name__ == "__main__":
         # output = output.cpu().detach().numpy()
         output = torch.argmax(output, dim=1)
         output = output.cpu()
-        
+
         for i in range(len(output)):
-            print(output[i])
-            print(target[i])
 
             if(output[i] == target[i]):
                 correct += 1
