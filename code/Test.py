@@ -42,6 +42,7 @@ if __name__ == "__main__":
         print("Output[0] type : ", type(output[0]))
         print("Target[0] type : ", type(target[0]))
         tmp_correct= 0
+        output = output.cpu().detach().numpy()
         for i in range(len(output)):
             if(output[i] == target[i]):
                 correct += 1
