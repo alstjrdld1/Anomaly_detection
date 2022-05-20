@@ -12,8 +12,8 @@ if __name__ == "__main__":
     print("Model load Complete")
 
     print("Model weight load")
-
     model.load_state_dict(torch.load('./ptfiles/20220519_149.pt'))
+    model = model.cuda()
     print("Model weight load Complete")
 
     print("loading test_data")
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     print("Testing.....")
     for idx, (input, target) in enumerate(test_loader):
         input = np.array(input)
-        input = torch.tensor(input)
+        input = torch.tensor(input, dtype=torch.float32)
 
         input = input.unsqueeze(1)
         input = input.float()
