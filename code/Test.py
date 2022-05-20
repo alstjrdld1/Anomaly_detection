@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print("loading test_data complete")
 
     test_loader = DataLoader(test_data, batch_size = 64, shuffle=False)
-
+    
     model.eval()
     
     correct = 0
@@ -36,7 +36,11 @@ if __name__ == "__main__":
         input = input.cuda()
         
         output = model(input)
+        print("Output type : ", type(output))
+        print("Target type : ", type(target))
 
+        print("Output[0] type : ", type(output[0]))
+        print("Target[0] type : ", type(target[0]))
         tmp_correct= 0
         for i in range(len(output)):
             if(output[i] == target[i]):
