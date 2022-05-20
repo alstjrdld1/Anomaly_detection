@@ -19,7 +19,8 @@ if __name__ == "__main__":
     print("Model weight load Complete")
 
     print("loading test_data")
-    test_data = MyDataSet_TEST()
+    # test_data = MyDataSet_TEST()
+    test_data = MyDataSet_TEST_donotmix()
     print("loading test_data complete")
 
     test_loader = DataLoader(test_data, batch_size = 64, shuffle=False)
