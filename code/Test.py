@@ -46,6 +46,8 @@ if __name__ == "__main__":
         tmp_correct= 0
         # output = output.cpu().detach().numpy()
         output = torch.argmax(output, dim=1)
+        output = output.cpu()
+        
         for i in range(len(output)):
             print(output[i])
             print(target[i])
